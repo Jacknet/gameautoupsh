@@ -1,0 +1,13 @@
+[Unit]
+Description=OpenRCT2 server instance
+After=network.target
+
+[Service]
+ExecStart=/home/ubuntu/OpenRCT2/openrct2-cli host /home/ubuntu/rct2/save/park.sv6 --user-data-path /home/ubuntu/rct2 --headless
+
+Type=simple
+User=ubuntu
+Group=ubuntu
+
+[Install]
+WantedBy=multi-user.target
