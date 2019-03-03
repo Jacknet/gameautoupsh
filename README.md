@@ -5,6 +5,7 @@ These scripts assume they're run under the home folder `~` as the working direct
 
 Tested in [Ubuntu Server 18.04 bionic](http://releases.ubuntu.com/18.04.2/).
 
+Service files also provided for reference.
 
 ### Prerequisites:
 * [jq](https://github.com/stedolan/jq/)
