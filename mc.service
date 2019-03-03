@@ -1,0 +1,13 @@
+[Unit]
+Description=MC Game Server
+After=network.target
+
+[Service]
+ExecStart=/bin/sh /home/ubuntu/mc/start.sh
+
+Type=simple
+User=ubuntu
+Group=ubuntu
+
+[Install]
+WantedBy=multi-user.target
