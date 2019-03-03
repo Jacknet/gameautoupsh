@@ -20,7 +20,9 @@ else
 	rm -rf mc.json
 	mv mcn.json mc.json
 	
-	
+	# Count the number of versions recognized by JSON array
+	# No longer needed, but kept commented for future reference
+	# vercount=$(expr $(cat mc.json | jq -r '.versions | length') - 1)
 	
 	# Counter values
 	arrayid=0
