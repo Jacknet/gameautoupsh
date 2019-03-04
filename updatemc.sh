@@ -20,23 +20,23 @@ else
 	rm -rf mc.json
 	mv mcn.json mc.json
 	
-	# Count the number of versions recognized by JSON array
-	# No longer needed, but kept commented for future reference
-	# vercount=$(expr $(cat mc.json | jq -r '.versions | length') - 1)
+	# Count the number of versions recognized by JSON array.
+	# Needed for buffer overflow prevention later in the script.
+	vercount=$(expr $(cat mc.json | jq -r '.versions | length') - 1)
 	
 	# Counter values
 	arrayid=0
 	gamematch=0
 	
-	# Until gamematch is 1 (true), keep running script
-	# Will try to find matching version out of its master list
+	# Until gamematch is 1 (true), keep running script.
+	# Will try to find matching version out of its master list.
 	until [ "$gamematch" -eq 1 ]
 	do
 		# Grab current array's game ID to compare
 		gameid=$(cat mc.json | jq -r .versions[$arrayid].id)
 		
-		# If array game ID matches the new build number from earlier, proceed
-		# Loop otherwise
+		# If array game ID matches the new build number
+		# from earlier, then proceed. Loop otherwise.
 		if [ "$gameid" = "$nbuild" ]
 		then
 			# Grab the URL where the version's JSON metadata is located
@@ -54,8 +54,16 @@ else
 			# Increment gamematch to end loop
 			let "gamematch++"
 		fi
+		
 		# Increment array index
 		let "arrayid++"
+		
+		# If statement that prevents possible buffer overflow
+        	if [ $arrayid -gt $vercount ]
+        	then
+                	echo "New version not recognized. Stopping installation..."
+                	let "gamematch++"
+        	fi
 	done
 fi
 
