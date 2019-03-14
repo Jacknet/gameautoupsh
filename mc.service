@@ -3,7 +3,7 @@ Description=MC Game Server
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/java -Xmx2G -jar /home/ubuntu/mc/server.jar nogui
+ExecStart=/bin/sh /home/ubuntu/mc/start.sh
 
 Type=simple
 User=ubuntu
