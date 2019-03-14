@@ -38,8 +38,8 @@ else
 	rm -rf OpenRCT2
 	tar -xzf rct2.tar.gz
 	rm -rf rct2.tar.gz
+	
+	# Restart server
+	echo "Starting server..."
+	sudo systemctl start rct2
 fi
-
-# Restart server
-echo "Starting server..."
-sudo systemctl start rct2
