@@ -1,11 +1,3 @@
-# Stop service and copy most recent autosaved map
-sudo systemctl stop rct2
-rm -rf rct2/save/park.sv6
-cd rct2/save/autosave
-save=$(ls -t autosave* | head -1)
-cp $save ../park.sv6
-cd ~
-
 # Grab build IDs of new rct2 JSON and old rct2 JSON
 $(curl -s 'https://openrct2.org/altapi/?command=get-latest-download&flavourId=9&gitBranch=develop' > rct2n.json)
 nbuild=$(cat rct2n.json | jq -r '.buildId')
@@ -19,7 +11,20 @@ then
 	rm -rf rct2n.json
 else
 	# Different ID detects new version and installs
-	echo "New version detected! Now installing..."
+	echo "New version detected!"
+	
+	# Stop service and copy most recent autosaved map
+	echo "Stopping server..."
+	sudo systemctl stop rct2
+	echo "Saving current map from autosave..."
+	rm -rf rct2/save/park.sv6
+	cd rct2/save/autosave
+	save=$(ls -t autosave* | head -1)
+	cp $save ../park.sv6
+	cd ~
+	
+	# Announce installation
+        echo "Now installing..."
 	
 	# Removes old JSON and swaps it with new JSON
 	rm -rf rct2.json
@@ -36,5 +41,5 @@ else
 fi
 
 # Restart server
-echo "Restarting server..."
+echo "Starting server..."
 sudo systemctl start rct2
