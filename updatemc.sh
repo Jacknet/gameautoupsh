@@ -1,6 +1,3 @@
-# Stop service
-sudo systemctl stop mc
-
 # Download new JSON and grab builds of both new and old JSON
 $(curl -s 'https://launchermeta.mojang.com/mc/game/version_manifest.json' > mcn.json)
 nbuild=$(cat mcn.json | jq -r '.latest.release')
@@ -13,8 +10,15 @@ then
 	echo "You are in the latest MC server version!"
 	rm -rf mcn.json
 else
-	# Different ID detects new version and installs
-	echo "New version detected! Now installing..."
+	# Different ID detects new version
+	echo "New version detected!"
+	
+	# Stop service
+	echo "Stopping server..."
+	sudo systemctl stop mc
+	
+	# Announce installation
+	echo "Now installing..."
 	
 	# Remove old JSON and swap it with new one
 	rm -rf mc.json
@@ -64,9 +68,9 @@ else
                 	echo "New version not recognized. Stopping installation..."
                 	let "gamematch++"
         	fi
+		
+		# Restart server
+		echo "Starting server..."
+		sudo systemctl start mc
 	done
 fi
-
-# Restart server
-echo "Restarting server..."
-sudo systemctl start mc
