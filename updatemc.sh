@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Download new JSON and grab builds of both new and old JSON
 $(curl -s 'https://launchermeta.mojang.com/mc/game/version_manifest.json' > mcn.json)
 nbuild=$(cat mcn.json | jq -r '.latest.release')
