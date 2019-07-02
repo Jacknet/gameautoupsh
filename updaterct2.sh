@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Grab build IDs of new rct2 JSON and old rct2 JSON
 $(curl -s 'https://openrct2.org/altapi/?command=get-latest-download&flavourId=9&gitBranch=develop' > rct2n.json)
 nbuild=$(cat rct2n.json | jq -r '.buildId')
