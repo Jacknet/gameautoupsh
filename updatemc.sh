@@ -15,6 +15,19 @@ else
 	# Different ID detects new version
 	echo "New version detected!"
 	
+	# Manual verification step to reduce data loss
+	echo
+	echo "Old release:"
+	cat mc.json
+	echo
+	echo "New release:"
+	cat mcn.json
+	echo
+	echo "Verify version, then press any key to continue."
+	echo "Otherwise, CTRL+C now to abort update."
+	echo "$(read -n 1 -s)"
+	echo "$(sleep 5)"
+	
 	# Stop service
 	echo "Stopping server..."
 	sudo systemctl stop mc
