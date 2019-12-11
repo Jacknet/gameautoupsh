@@ -18,10 +18,10 @@ else
 	# Manual verification step to reduce data loss
 	echo
 	echo "Old release:"
-	cat mc.json
+	echo "$obuild"
 	echo
 	echo "New release:"
-	cat mcn.json
+	echo "$nbuild"
 	echo
 	echo "Verify version, then press any key to continue."
 	echo "Otherwise, CTRL+C now to abort update."
