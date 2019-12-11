@@ -15,6 +15,19 @@ else
 	# Different ID detects new version and installs
 	echo "New version detected!"
 	
+	# Manual verification step to reduce data loss
+	echo
+	echo "Old release:"
+	cat rct2.json
+	echo
+	echo "New release:"
+	cat rct2n.json
+	echo
+	echo "Verify version, then press any key to continue."
+	echo "Otherwise, CTRL+C now to abort update."
+	echo "$(read -n 1 -s)"
+	echo "$(sleep 5)"
+	
 	# Stop service and copy most recent autosaved map
 	echo "Stopping server..."
 	sudo systemctl stop rct2
