@@ -71,17 +71,17 @@ else
 			cd ~
 			
 			# Increment gamematch to end loop
-			let "gamematch++"
+			gamematch=$((gamematch+1))
 		fi
 		
 		# Increment array index
-		let "arrayid++"
+		arrayid=$((arrayid+1))
 		
 		# If statement that prevents possible buffer overflow
         	if [ $arrayid -gt $vercount ]
         	then
                 	echo "New version not recognized. Stopping installation..."
-                	let "gamematch++"
+                	gamematch=$((gamematch+1))
         	fi
 		
 		# Restart server
